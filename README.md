@@ -1,105 +1,93 @@
-# EX-01 Developing AI Agent with PEAS Description
+<h1>ExpNo 1 :Developing AI Agent with PEAS Description</h1>
+<h3>Name: Prajeeth K T </h3>
+<h3>Register Number: 212222110034</h3>
 
-### Aim:
-To find the PEAS description for the given AI problem and develop an AI agent.&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**DATE:**
-### Theory:
-##### Medicine prescribing agent:
+
+<h3>AIM:</h3>
+<p>To find the PEAS description for the given AI problem and develop an AI agent.</p>
+<h3>Theory</h3>
+<h3>Medicine prescribing agent:</h3>
 <p>Such this agent prescribes medicine for fever (greater than 98.5 degrees) which we consider here as unhealthy, by the user temperature input, and another environment is rooms in the hospital (two rooms). This agent has to consider two factors one is room location and an unhealthy patient in a random room, the agent has to move from one room to another to check and treat the unhealthy person. The performance of the agent is calculated by incrementing performance and each time after treating in one room again it has to check another room so that the movement causes the agent to reduce its performance. Hence, agents prescribe medicine to unhealthy.</p>
-
-#### PEAS DESCRIPTION:
+<hr>
+<h3>PEAS DESCRIPTION:</h3>
 <table>
   <tr>
-    <td> Agent Type </td>
-    <td> Performance </td>
-     <td> Environment </td>
-    <td> Actuators </td>
-    <td> Sensors </td>
+    <td><strong>Agent Type</strong></td>
+    <td><strong>Performance</strong></td>
+     <td><strong>Environment</strong></td>
+    <td><strong>Actuators</strong></td>
+    <td><strong>Sensors</strong></td>
   </tr>
     <tr>
-    <td> Vaccum Cleaner agent </td>
-    <td> Cleaning Dirt </td>
-     <td> Rooms,floor  </td>
-    <td> Dirt,Cleaning </td>
-    <td> Location,Sensing Dirt </td>
+    <td><strong>Medicine prescribing agent</strong></td>
+    <td><strong>Treating unhealthy, agent movement</strong></td>
+     <td><strong>Rooms, Patient</strong></td>
+    <td><strong>Medicine, Treatment</strong></td>
+    <td><strong>Location, Temperature of patient</strong></td>
   </tr>
 </table>
+<hr>
+<H3>DESIGN STEPS</H3>
+<h3>STEP 1:Identifying the input:</h3>
+<p>Temperature from patients, Location.</p>
+<h3>STEP 2:Identifying the output:</h3>
+<p>Prescribe medicine if the patient in a random has a fever.</p>
+<h3>STEP 3:Developing the PEAS description:</h3>
+<p>PEAS description is developed by the performance, environment, actuators, and sensors in an agent.</p>
+<h3>STEP 4:Implementing the AI agent:</h3>
+<p>Treat unhealthy patients in each room. And check for the unhealthy patients in random room</p>
+<h3>STEP 5:</h3>
+<p>Measure the performance parameters: For each treatment performance incremented, for each movement performance decremented</p>
 
-### Design Steps:
-**STEP 1:** Identifying the input:(Temperature from patients, Location.)<br>
-**STEP 2:** Identifying the output:(Prescribe medicine if the patient in a random has a fever.)<br>
-**STEP 3:** Developing the PEAS description:(PEAS description is developed by the performance, environment, actuators, and sensors in an agent.)<br>
-**STEP 4:** Implementing the AI agent:(Treat unhealthy patients in each room. And check for the unhealthy patients in random room.)<br>
-**STEP 5:** Measure the performance parameters: (For each treatment performance incremented, for each movement performance decremented)<br><br>
-**Developed By: PRAJEETH K T**<br>
-**Register No: 212222110034**
-### Program:
-```Python
+ ## PROGRAM:
+```py
 import random
-class VacuumCleanerAgent:
-    def __init__(self): # Initialize the agent's state (location and dirt status)
-        self.location = "A"  # Initial location (can be "A" or "B")
-        self.dirt_status = {"A": True, "B": True}  # Initial dirt status (False means no dirt)
-        self.performance=0
-    def move_left(self): # Move the agent to the left if possible
-        if self.location == "B":
-            self.location = "A"
-    def move_right(self): # Move the agent to the right if possible
-        if self.location == "A":
-            self.location = "B"
-    def suck_dirt(self): # Suck dirt in the current location if there is dirt
-        if self.dirt_status[self.location]:
-            self.dirt_status[self.location] = False
-            print(f"Sucked dirt in location {self.location}")
-    def do_nothing(self): # Do nothing
-        pass
-    def perform_action(self, action): # Perform the specified action
-        if action == "left":
-            self.performance=self.performance-1
-            self.move_left()
-        elif action == "right":
-            self.performance=self.performance-1
-            self.move_right()
-        elif action == "suck":
-            self.performance=self.performance+10
-            self.suck_dirt()
-        elif action == "nothing":
-            self.do_nothing()
-        else:
-            print("Invalid action")
-    def print_status(self): # Print the current status of the agent
-        print(f"Location: {self.location}, Dirt Status: {self.dirt_status}, ",end="")
-        print(f"Perfomance Measure: {self.performance}")
-# Example usage:
-agent = VacuumCleanerAgent()
-# Move the agent, suck dirt, and do nothing
-agent.perform_action("left")
-agent.print_status()
-agent.perform_action("suck")
-agent.print_status()
-agent.perform_action("right")
-agent.print_status()
-agent.perform_action("suck")
-agent.print_status()
-agent.perform_action("nothing")
-agent.print_status()
-```
-### Output:
-<table border=3>
-<tr>
-<td >
-  
-```
-Location: A, Dirt Status: {'A': True, 'B': True}, Perfomance Measure: -1         
-Sucked dirt in location A
-Location: A, Dirt Status: {'A': False, 'B': True}, Perfomance Measure: 9
-Location: B, Dirt Status: {'A': False, 'B': True}, Perfomance Measure: 8
-Sucked dirt in location B
-Location: B, Dirt Status: {'A': False, 'B': False}, Perfomance Measure: 18
-Location: B, Dirt Status: {'A': False, 'B': False}, Perfomance Measure: 18
-```
-</td>
-</tr> 
-</table>
+ROOMS = ["Room 1", "Room 2"]
+FEVER_THRESHOLD = 98.5
+environment = {
+    "Room 1": round(random.uniform(97.0, 101.0), 1),
+    "Room 2": round(random.uniform(97.0, 101.0), 1)
+}
+agent_location = "Room 1"
+performance_score = 0
 
-### Result:
-Thus the Developing AI Agent with PEAS Description was implemented using python programming.
+def check_temperature(room):
+    temp = environment[room]
+    print(f"Checking {room}... Patient temperature: {temp}°F")
+    return temp
+
+def treat_patient(room):
+    global performance_score
+    print(f"Treating patient in {room}... ")
+    performance_score += 1  # successful treatment
+
+def move_to(room):
+    global agent_location, performance_score
+    if agent_location != room:
+        print(f"Moving from {agent_location} to {room}... ")
+        agent_location = room
+        performance_score -= 1  # movement cost
+print("Medicine Prescribing Agent Simulation Started \n")
+
+for room in ROOMS:
+    move_to(room)
+    temp = check_temperature(room)
+    if temp > FEVER_THRESHOLD:
+        treat_patient(room)
+    else:
+        print(f"No treatment needed in {room}.\n")
+print("\nSimulation Complete!")
+print(f"Final Performance Score: {performance_score}")
+print("Environment State:", environment)
+
+```
+## OUTPUT:
+
+
+![Screenshot 2025-04-09 224919](https://github.com/user-attachments/assets/011de404-7d81-468f-ad80-14d1e1c4f150)
+
+
+## RESULT :
+Thus, an AI agent is developed.
+
+ 
